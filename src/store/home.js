@@ -4,7 +4,8 @@ import { apiUrl } from "./config";
 export const home = {
      state: {
       breeds: [],
-      dogImages: []
+      dogImages: [],
+      filteredDog: ""
      },
       mutations: {
         BreedList(state, data) {
@@ -13,6 +14,9 @@ export const home = {
           },
           DogImages(state, data){
             state.dogImages = data.message
+          },
+          filterDogs(state, data){
+            state.filteredDog = data
           }
       },
       actions: {

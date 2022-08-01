@@ -23,7 +23,7 @@
 
       <template v-else>
           <div v-for="(item, index) in DogImages" :key="index" class="col-lg-3 col-6 mb-4">
-            <div class="dog_div" @click="handleRoute(index)">
+            <div class="dog_div" @click="handleRoute(index,item)">
                 <img :src="item" alt="dogs" class="img-fluid" />
             </div>
           </div>
@@ -52,7 +52,8 @@ export default {
     }
   },
   methods:{
-    handleRoute(index){
+    handleRoute(index, item){
+      this.$store.commit("filterDogs", item)
       this.$router.push(`/dog/${index}`);
     }
   },
@@ -77,10 +78,37 @@ export default {
 </script>
 
 <style scoped>
+  .dog_div{
+    display: flex;
+    height: 300px;
+    background-color: #fff;
+    overflow: hidden;
+  }
   .dog_div img{
     border-radius: 5px;
-    object-fit: contain;
     cursor: pointer;
+      margin: 0 auto;
+    width: 100%;
+    object-fit: cover;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 1s cubic-bezier(0.5, 0, 0, 1) 0s;
   }
+
+   @media (min-width: 0) and (max-width: 900px){
+       .dog_div{
+          display: flex;
+          height: 200px;
+          background-color: #fff;
+          border-radius: 2px;
+          overflow: hidden;
+          padding: 0px;
+          margin: 0px;
+          border: none;
+        }
+        .dog_div img{
+          width: 100%;
+        }
+    }
 
 </style>

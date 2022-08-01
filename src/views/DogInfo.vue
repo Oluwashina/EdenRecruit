@@ -1,8 +1,8 @@
 <template>
     <div class="container">
-        
-        
-
+        <div class="mt-4">
+            <img :src="Info" class="img-fluid" alt="dog" />
+        </div>
     </div>
 </template>
 
@@ -14,6 +14,14 @@ export default {
         return{
 
         }
+    },
+    computed:{
+        Info(){
+            return this.$store.state.home.filteredDog
+        }
+    },
+    methods:{
+
     }
 }
 </script>
