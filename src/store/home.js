@@ -36,6 +36,23 @@ export const home = {
                  });
              });
            },
+          //  Fetch dog images by breeds
+          ListDogsByBreeds: ({ commit }, payload) => {
+            return new Promise((resolve, reject) => {
+              axios
+                .get(`${apiUrl}/breeds/${payload}/images`)
+                .then(({ data, status }) => {
+                  if (status === 200) {
+                    commit("BreedList", data);
+                    resolve(data);
+                  }
+                })
+                .catch((error) => {
+                  reject(error);
+                });
+            });
+          },
+
            // DISPLAY MULTIPLE RANDOM IMAGES FROM ALL DOGS COLLECTION
            ListRandomImages: ({ commit }) => {
             return new Promise((resolve, reject) => {
