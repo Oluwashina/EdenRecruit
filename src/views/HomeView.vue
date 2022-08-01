@@ -1,35 +1,36 @@
 <template>
   <div class="home">
      <NavBar />
-    <div class="container mt-4">
-      <h6>Popular Breeds</h6>
+    <div class="container mt-5">
 
-      <div class="row mt-3">
-        <div class="col-lg-3">
-          <div class="dog_div">
-              <img src="https://images.dog.ceo/breeds/hound-afghan/n02088094_1003.jpg" alt="dogs" class="img-fluid" />
-          </div>
-        </div>
+      <h3>Dog Images</h3>
 
-         <div class="col-lg-3">
-          <div class="dog_div">
-              <img src="https://images.dog.ceo/breeds/hound-afghan/n02088094_1003.jpg" alt="dogs" class="img-fluid" />
-          </div>
-        </div>
+      <div class="row mt-4">
+      <template v-if="loading">
+         <div
+            v-for="n in 12"
+                class="col-lg-3 col-6 mb-4"
+                :key="n"
+              >
+            <VueSkeletonLoader
+                type="rect"
+                :width="300"
+                :height="250"
+                animation="wave"
+              />
+         </div>
+      </template>
 
-         <div class="col-lg-3">
-          <div class="dog_div">
-              <img src="https://images.dog.ceo/breeds/hound-afghan/n02088094_1003.jpg" alt="dogs" class="img-fluid" />
+      <template v-else>
+          <div v-for="(item, index) in DogImages" :key="index" class="col-lg-3 col-6 mb-4">
+            <div class="dog_div" @click="handleRoute(index)">
+                <img :src="item" alt="dogs" class="img-fluid" />
+            </div>
           </div>
-        </div>
-
-         <div class="col-lg-3">
-          <div class="dog_div">
-              <img src="https://images.dog.ceo/breeds/hound-afghan/n02088094_1007.jpg" alt="dogs" class="img-fluid" />
-          </div>
-        </div>
+      </template>
 
       </div>
+
     </div>
   </div>
 </template>
@@ -37,11 +38,40 @@
 <script>
 // @ is an alias to /src
 import NavBar from '@/components/NavBar.vue'
+import VueSkeletonLoader from "skeleton-loader-vue";
 
 export default {
   name: 'HomeView',
   components: {
-      NavBar
+      NavBar,
+      VueSkeletonLoader
+  },
+  data(){
+    return{
+      loading: false
+    }
+  },
+  methods:{
+    handleRoute(index){
+      this.$router.push(`/dog/${index}`);
+    }
+  },
+  computed: {
+    DogImages(){
+      return this.$store.state.home.dogImages
+    }
+  },
+  mounted(){
+    this.loading = true
+    // fetch the list of all random dog images
+     this.$store.dispatch("ListRandomImages")
+    .then(()=>{
+          this.loading = false 
+      })
+      .catch(()=>{
+        this.loading = false
+    })
+
   }
 }
 </script>
@@ -49,12 +79,8 @@ export default {
 <style scoped>
   .dog_div img{
     border-radius: 5px;
-    
+    object-fit: contain;
+    cursor: pointer;
   }
 
- @media (min-width: 901px) and (max-width: 1440px){
-  .container {
-    max-width: 1300px;
-  }
-}
 </style>

@@ -1,6 +1,8 @@
 <template>
-    <div>
-            <p>I am a dog.</p>
+    <div class="container">
+        
+        
+
     </div>
 </template>
 
