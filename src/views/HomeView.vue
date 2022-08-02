@@ -23,7 +23,7 @@
 
       <template v-else>
           <div v-for="(item, index) in DogImages" :key="index" class="col-lg-3 col-6 mb-4">
-            <div class="dog_div" @click="handleRoute(index,item)">
+            <div class="dog_div" @click="handleRoute(item)">
                 <img :src="item" alt="dogs" class="img-fluid" />
             </div>
           </div>
@@ -37,7 +37,7 @@
 
 <script>
 // @ is an alias to /src
-import NavBar from '../components/NavBar';
+import NavBar from '@/components/NavBar.vue';
 import VueSkeletonLoader from "skeleton-loader-vue";
 
 export default {
@@ -52,9 +52,13 @@ export default {
     }
   },
   methods:{
-    handleRoute(index, item){
+    handleRoute(item){
+      let positionLeft = item.indexOf('breed')
+      let positionRight = item.lastIndexOf('/')
+      let breed = item.slice(item.indexOf('/', positionLeft) + 1, positionRight)
+
       this.$store.commit("filterDogs", item)
-      this.$router.push(`/dog/${index}`);
+      this.$router.push(`/dog/${breed}`);
     },
     handleSearch(val){
       this.loading = true
@@ -90,7 +94,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
   .dog_div{
     display: flex;
     height: 300px;
