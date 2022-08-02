@@ -55,7 +55,7 @@
 <script>
 import { VueAutosuggest } from "vue-autosuggest";
 export default {
-     name: 'NavBar',
+     name: 'NavigationComponent',
      emits: ['search', 'fetchAll'],
      components:{
          VueAutosuggest

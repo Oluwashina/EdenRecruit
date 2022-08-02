@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-     <HelloWorld @search="handleSearch" @fetchAll="fetchRandomImages" />
+     <NavigationComponent @search="handleSearch" @fetchAll="fetchRandomImages" />
     <div class="container mt-5">
 
       <h3>Dog Images</h3>
@@ -37,12 +37,12 @@
 
 <script>
 import VueSkeletonLoader from "skeleton-loader-vue";
-import HelloWorld from '@/components/HelloWorld.vue'
+import NavigationComponent from '@/components/NavigationComponent.vue'
 
 export default {
   name: 'HomeView',
   components: {
-      HelloWorld,
+      NavigationComponent,
       VueSkeletonLoader
   },
   data(){
