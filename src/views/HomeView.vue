@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-     <!-- <NavBar @search="handleSearch" @fetchAll="fetchRandomImages" /> -->
+     <nav-bar />
     <div class="container mt-5">
 
       <h3>Dog Images</h3>
@@ -36,13 +36,13 @@
 </template>
 
 <script>
-// import NavBar from '@/components/NavBar.vue';
+import NavBar from '@/components/NavBar.vue';
 import VueSkeletonLoader from "skeleton-loader-vue";
 
 export default {
   name: 'HomeView',
   components: {
-      // NavBar,
+      NavBar,
       VueSkeletonLoader
   },
   data(){
