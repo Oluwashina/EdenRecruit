@@ -2,6 +2,7 @@
     <div class="container">
         <div class="mt-5 dog_info">
             <img :src="Info" class="img-fluid" alt="dog" />
+             <h3 class="breed_name mb-0">{{this.$route.params.breed}}</h3>
         </div>
 
         <div class="mt-5">
@@ -29,6 +30,7 @@
                 <div v-for="(item, index) in DogImages" :key="index" class="col-lg-3 col-6 mb-4">
                     <div class="dog_div">
                         <img :src="item" alt="dogs" class="img-fluid" />
+                
                     </div>
                 </div>
              </template>
@@ -84,6 +86,13 @@ export default {
          display: flex;
          height: 500px;
          justify-content: center;
+         position: relative;
+    }
+    .breed_name{
+        position: absolute;
+        left: 30px;
+        bottom: 30px;
+        color: white;
     }
     .dog_info img{
         border-radius: 5px;
