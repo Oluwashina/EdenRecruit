@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-     <nav-bar />
-     <HelloWorld msg="Welcome to Your Vue.js App"/>
+     <!-- <nav-bar /> -->
+     <HelloWorld @search="handleSearch" @fetchAll="fetchRandomImages" />
     <div class="container mt-5">
 
       <h3>Dog Images</h3>
@@ -39,13 +39,13 @@
 <script>
 import VueSkeletonLoader from "skeleton-loader-vue";
 import HelloWorld from '@/components/HelloWorld.vue'
-import NavBar from '@/components/NavBar.vue';
+// import NavBar from '@/components/NavBar.vue';
 
 export default {
   name: 'HomeView',
   components: {
       HelloWorld,
-      NavBar,
+      // NavBar,
       VueSkeletonLoader
   },
   data(){
