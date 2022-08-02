@@ -25,11 +25,11 @@
 
               
             </div>
-            <div class="navbar_right">   
-               <p class="nav_text">Partnership</p>    
-               <p class="nav_text">License</p>    
+            <div class="navbar_right">    
+               <p class="nav_text">About us</p>    
                <p class="nav_text">Upload</p>    
                <p class="nav_text">Explore</p>    
+               <p class="nav_text">Join us</p>    
                   <svg
                         class="d-lg-none d-sm-flex open_icon"
                         xmlns="http://www.w3.org/2000/svg"
@@ -56,12 +56,12 @@
 import { VueAutosuggest } from "vue-autosuggest";
 export default {
      name: 'NavBar',
+     emits: ['search', 'fetchAll'],
      components:{
          VueAutosuggest
      },
      data(){
          return{
-            selected: "",
             query: ""
          }
      },
@@ -81,11 +81,16 @@ export default {
      },
      methods:{
         onSelected(item) {
-            this.selected = item.item;
+            let selected = item.item
+            // emit to home view page
+            this.$emit("search", selected)
          },
         onInputChange(text) {
             // event fired when the input changes
             console.log(text);
+            if(text === ""){
+                this.$emit("fetchAll")
+            }
         },
          getSuggestionValue(suggestion) {
             return suggestion.item;

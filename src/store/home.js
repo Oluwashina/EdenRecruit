@@ -40,10 +40,10 @@ export const home = {
           ListDogsByBreeds: ({ commit }, payload) => {
             return new Promise((resolve, reject) => {
               axios
-                .get(`${apiUrl}/breeds/${payload}/images`)
+                .get(`${apiUrl}/breed/${payload}/images`)
                 .then(({ data, status }) => {
                   if (status === 200) {
-                    commit("BreedList", data);
+                    commit("DogImages", data);
                     resolve(data);
                   }
                 })

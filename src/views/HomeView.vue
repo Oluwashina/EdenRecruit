@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-     <NavBar />
+     <NavBar @search="handleSearch" @fetchAll="fetchRandomImages" />
     <div class="container mt-5">
 
       <h3>Dog Images</h3>
@@ -55,6 +55,28 @@ export default {
     handleRoute(index, item){
       this.$store.commit("filterDogs", item)
       this.$router.push(`/dog/${index}`);
+    },
+    handleSearch(val){
+      this.loading = true
+      // fetch the list of all random dog images
+      this.$store.dispatch("ListDogsByBreeds", val)
+      .then(()=>{
+            this.loading = false 
+        })
+        .catch(()=>{
+          this.loading = false
+      })  
+    },
+    fetchRandomImages(){
+      this.loading = true
+      // fetch the list of all random dog images
+      this.$store.dispatch("ListRandomImages")
+      .then(()=>{
+            this.loading = false 
+        })
+        .catch(()=>{
+          this.loading = false
+      })
     }
   },
   computed: {
@@ -63,16 +85,7 @@ export default {
     }
   },
   mounted(){
-    this.loading = true
-    // fetch the list of all random dog images
-     this.$store.dispatch("ListRandomImages")
-    .then(()=>{
-          this.loading = false 
-      })
-      .catch(()=>{
-        this.loading = false
-    })
-
+    this.fetchRandomImages()
   }
 }
 </script>
