@@ -9,11 +9,29 @@
         </div>
         <!-- Other Images for the same breed selected -->
         <div class="row mt-4">
-            <div v-for="(item, index) in DogImages" :key="index" class="col-lg-3 col-6 mb-4">
-                <div class="dog_div">
-                    <img :src="item" alt="dogs" class="img-fluid" />
+
+           <template v-if="loading">
+                <div
+                    v-for="n in 12"
+                        class="col-lg-3 col-6 mb-4"
+                        :key="n"
+                    >
+                    <VueSkeletonLoader
+                        type="rect"
+                        :width="300"
+                        :height="250"
+                        animation="wave"
+                    />
                 </div>
-            </div>
+            </template>
+
+             <template v-else>
+                <div v-for="(item, index) in DogImages" :key="index" class="col-lg-3 col-6 mb-4">
+                    <div class="dog_div">
+                        <img :src="item" alt="dogs" class="img-fluid" />
+                    </div>
+                </div>
+             </template>
         </div>
 
     </div>
@@ -21,8 +39,13 @@
 
 
 <script>
+import VueSkeletonLoader from "skeleton-loader-vue";
+
 export default {
     name: 'DogInfo',
+    components: {
+        VueSkeletonLoader
+    },
     data(){
         return{
             loading: false
