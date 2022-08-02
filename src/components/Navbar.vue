@@ -83,13 +83,13 @@ export default {
         onSelected(item) {
             let selected = item.item
             // emit to home view page
-            this.$emit("search", selected)
+            this.$emit('search', selected)
          },
         onInputChange(text) {
             // event fired when the input changes
             console.log(text);
             if(text === ""){
-                this.$emit("fetchAll")
+                this.$emit('fetchAll')
             }
         },
          getSuggestionValue(suggestion) {
